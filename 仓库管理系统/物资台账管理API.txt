@@ -1,0 +1,29 @@
+package com.example.warehouse.controller;
+
+import com.example.warehouse.model.MaterialLedger;
+import com.example.warehouse.service.MaterialLedgerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/materialLedger")
+public class MaterialLedgerController {
+
+    @Autowired
+    private MaterialLedgerService materialLedgerService;
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addMaterialLedger(@RequestBody MaterialLedger materialLedger) {
+        materialLedgerService.addMaterialLedger(materialLedger);
+        return ResponseEntity.ok("Material ledger added successfully");
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<MaterialLedger>> listMaterialLedgers() {
+        List<MaterialLedger> ledgers = materialLedgerService.listMaterialLedgers();
+        return ResponseEntity.ok(ledgers);
+    }
+}

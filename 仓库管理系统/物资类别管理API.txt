@@ -1,0 +1,41 @@
+package com.example.warehouse.controller;
+
+import com.example.warehouse.model.MaterialCategory;
+import com.example.warehouse.service.MaterialCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/materialCategory")
+public class MaterialCategoryController {
+
+    @Autowired
+    private MaterialCategoryService materialCategoryService;
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addMaterialCategory(@RequestBody MaterialCategory materialCategory) {
+        materialCategoryService.addMaterialCategory(materialCategory);
+        return ResponseEntity.ok("Material category added successfully");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteMaterialCategory(@PathVariable String id) {
+        materialCategoryService.deleteMaterialCategory(id);
+        return ResponseEntity.ok("Material category deleted successfully");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateMaterialCategory(@RequestBody MaterialCategory materialCategory) {
+        materialCategoryService.updateMaterialCategory(materialCategory);
+        return ResponseEntity.ok("Material category updated successfully");
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<MaterialCategory>> listMaterialCategories() {
+        List<MaterialCategory> categories = materialCategoryService.listMaterialCategories();
+        return ResponseEntity.ok(categories);
+    }
+}

@@ -1,0 +1,50 @@
+package com.example.warehouse.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "material_ledger")
+public class MaterialLedger {
+    @Id
+    @Column(name = "ledger_id")
+    private String ledgerId;
+
+    @Column(name = "material_code")
+    private String materialCode;
+
+    @Column(name = "material_name")
+    private String materialName;
+
+    @Column(name = "specification")
+    private String specification;
+
+    @Column(name = "material_type")
+    private String materialType;
+
+    @Column(name = "supplier")
+    private String supplier;
+
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "category_id")
+    private String categoryId;
+
+    @Column(name = "operation_type")
+    private String operationType;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "unit")
+    private String unit;
+
+    @Column(name = "warehouse_id")
+    private String warehouseId;
+
+    @Column(name = "operation_time")
+    private LocalDateTime operationTime;
+
+    // Getters and Setters
+}

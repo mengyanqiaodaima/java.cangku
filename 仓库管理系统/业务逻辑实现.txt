@@ -1,0 +1,31 @@
+package com.example.warehouse.service;
+
+import com.example.warehouse.model.Warehouse;
+import com.example.warehouse.repository.WarehouseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class WarehouseService {
+
+    @Autowired
+    private WarehouseRepository warehouseRepository;
+
+    public void addWarehouse(Warehouse warehouse) {
+        warehouseRepository.save(warehouse);
+    }
+
+    public void deleteWarehouse(String id) {
+        warehouseRepository.deleteById(id);
+    }
+
+    public void updateWarehouse(Warehouse warehouse) {
+        warehouseRepository.save(warehouse);
+    }
+
+    public List<Warehouse> listWarehouses() {
+        return warehouseRepository.findAll();
+    }
+}

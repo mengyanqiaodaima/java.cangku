@@ -1,0 +1,7 @@
+CREATE TABLE material_category (
+    category_id VARCHAR(20) PRIMARY KEY,
+    material_name VARCHAR(50) NOT NULL,
+    specification VARCHAR(50),
+    material_type VARCHAR(50),
+    brand VARCHAR(50)
+);

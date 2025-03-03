@@ -1,0 +1,16 @@
+CREATE TABLE material_ledger (
+    ledger_id VARCHAR(20) PRIMARY KEY,
+    material_code VARCHAR(20) NOT NULL,
+    material_name VARCHAR(50) NOT NULL,
+    specification VARCHAR(50),
+    material_type VARCHAR(50),
+    supplier VARCHAR(50),
+    brand VARCHAR(50),
+    category_id VARCHAR(20) NOT NULL,
+    operation_type ENUM('IN', 'OUT') NOT NULL,
+    quantity INT NOT NULL,
+    unit VARCHAR(10) NOT NULL,
+    warehouse_id VARCHAR(20) NOT NULL,
+    operation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (warehouse_id) REFERENCES warehouse(warehouse_id)
+);

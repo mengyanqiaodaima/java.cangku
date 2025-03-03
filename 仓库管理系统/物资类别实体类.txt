@@ -1,0 +1,25 @@
+package com.example.warehouse.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "material_category")
+public class MaterialCategory {
+    @Id
+    @Column(name = "category_id")
+    private String categoryId;
+
+    @Column(name = "material_name")
+    private String materialName;
+
+    @Column(name = "specification")
+    private String specification;
+
+    @Column(name = "material_type")
+    private String materialType;
+
+    @Column(name = "brand")
+    private String brand;
+
+    // Getters and Setters
+}
