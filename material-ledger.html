@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物资台账管理</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 引入现代化CSS样式 -->
+    <link rel="stylesheet" href="assets/css/modern.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏 -->
+            <div class="col-md-2 sidebar">
+                <div class="sidebar-header">
+                    <h4>仓库管理系统</h4>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="warehouse.html"><i class="fa fa-building"></i> 仓库管理</a></li>
+                    <li><a href="material-category.html"><i class="fa fa-sitemap"></i> 物资分类</a></li>
+                    <li><a href="material-ledger.html" class="active"><i class="fa fa-book"></i> 物资台账</a></li>
+                    <li><a href="warehouse-in.html"><i class="fa fa-arrow-down"></i> 入库管理</a></li>
+                    <li><a href="warehouse-out.html"><i class="fa fa-arrow-up"></i> 出库管理</a></li>
+                    <li><a href="inventory.html"><i class="fa fa-search"></i> 库存查询</a></li>
+                </ul>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class="col-md-10 content">
+                <div class="page-header">
+                    <h2>物资台账管理</h2>
+                </div>
+                
+                <!-- 搜索和操作栏 -->
+                <div class="card card-search">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="search-form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="搜索物资名称或编码">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fa fa-search"></i> 搜索
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button class="btn btn-success btn-lg btn-rounded" data-toggle="modal" data-target="#addMaterialModal">
+                                    <i class="fa fa-plus"></i> 添加物资
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 物资列表 -->
+                <div class="row content-row">
+                    <div class="col-md-12">
+                        <div class="card data-card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table modern-table">
+                                        <thead>
+                                            <tr>
+                                                <th>物资编码</th>
+                                                <th>物资名称</th>
+                                                <th>分类</th>
+                                                <th>规格</th>
+                                                <th>单位</th>
+                                                <th>单价</th>
+                                                <th>最低库存</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>MAT001</td>
+                                                <td>螺丝</td>
+                                                <td>金属材料</td>
+                                                <td>M8×20</td>
+                                                <td>个</td>
+                                                <td>0.50</td>
+                                                <td>100</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editMaterialModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>MAT002</td>
+                                                <td>螺母</td>
+                                                <td>金属材料</td>
+                                                <td>M8</td>
+                                                <td>个</td>
+                                                <td>0.30</td>
+                                                <td>100</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editMaterialModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>MAT003</td>
+                                                <td>塑料板</td>
+                                                <td>非金属材料</td>
+                                                <td>1000×500×5</td>
+                                                <td>块</td>
+                                                <td>50.00</td>
+                                                <td>20</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editMaterialModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 添加物资模态框 -->
+    <div class="modal fade" id="addMaterialModal" tabindex="-1" role="dialog" aria-labelledby="addMaterialModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMaterialModalLabel">添加物资</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="materialCode">物资编码</label>
+                            <input type="text" class="form-control" id="materialCode" placeholder="自动生成">
+                        </div>
+                        <div class="form-group">
+                            <label for="materialName">物资名称</label>
+                            <input type="text" class="form-control" id="materialName" placeholder="请输入物资名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryId">物资分类</label>
+                            <select class="form-control" id="categoryId">
+                                <option value="">请选择分类</option>
+                                <option value="1">原材料</option>
+                                <option value="2">金属材料</option>
+                                <option value="3">非金属材料</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="spec">规格</label>
+                            <input type="text" class="form-control" id="spec" placeholder="请输入规格">
+                        </div>
+                        <div class="form-group">
+                            <label for="unit">单位</label>
+                            <input type="text" class="form-control" id="unit" placeholder="请输入单位">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">单价</label>
+                            <input type="number" class="form-control" id="price" placeholder="请输入单价" step="0.01" value="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="minStock">最低库存</label>
+                            <input type="number" class="form-control" id="minStock" placeholder="请输入最低库存" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">描述</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="请输入物资描述"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 编辑物资模态框 -->
+    <div class="modal fade" id="editMaterialModal" tabindex="-1" role="dialog" aria-labelledby="editMaterialModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMaterialModalLabel">编辑物资</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="editMaterialCode">物资编码</label>
+                            <input type="text" class="form-control" id="editMaterialCode" value="MAT001" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMaterialName">物资名称</label>
+                            <input type="text" class="form-control" id="editMaterialName" value="螺丝">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoryId">物资分类</label>
+                            <select class="form-control" id="editCategoryId">
+                                <option value="">请选择分类</option>
+                                <option value="1">原材料</option>
+                                <option value="2" selected>金属材料</option>
+                                <option value="3">非金属材料</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editSpec">规格</label>
+                            <input type="text" class="form-control" id="editSpec" value="M8×20">
+                        </div>
+                        <div class="form-group">
+                            <label for="editUnit">单位</label>
+                            <input type="text" class="form-control" id="editUnit" value="个">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrice">单价</label>
+                            <input type="number" class="form-control" id="editPrice" value="0.50" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="editMinStock">最低库存</label>
+                            <input type="number" class="form-control" id="editMinStock" value="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">描述</label>
+                            <textarea class="form-control" id="editDescription" rows="3">M8×20螺丝</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入jQuery和Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

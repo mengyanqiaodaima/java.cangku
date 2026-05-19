@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物资分类 - 仓库管理系统</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 引入现代化CSS样式 -->
+    <link rel="stylesheet" href="assets/css/modern.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏 -->
+            <div class="col-md-2 sidebar">
+                <div class="sidebar-header">
+                    <h4>仓库管理系统</h4>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="warehouse.html"><i class="fa fa-building"></i> 仓库管理</a></li>
+                    <li><a href="material-category.html" class="active"><i class="fa fa-sitemap"></i> 物资分类</a></li>
+                    <li><a href="material-ledger.html"><i class="fa fa-book"></i> 物资台账</a></li>
+                    <li><a href="warehouse-in.html"><i class="fa fa-arrow-down"></i> 入库管理</a></li>
+                    <li><a href="warehouse-out.html"><i class="fa fa-arrow-up"></i> 出库管理</a></li>
+                    <li><a href="inventory.html"><i class="fa fa-search"></i> 库存查询</a></li>
+                </ul>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class="col-md-10 content">
+                <div class="page-header">
+                    <h2>物资分类管理</h2>
+                </div>
+                
+                <!-- 搜索和操作栏 -->
+                <div class="card card-search">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="search-form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="搜索分类名称">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary btn-lg btn-rounded" type="button">
+                                                <i class="fa fa-search"></i> 搜索
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button class="btn btn-success btn-lg btn-rounded" data-toggle="modal" data-target="#addCategoryModal">
+                                    <i class="fa fa-plus"></i> 添加分类
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 分类树形结构 -->
+                <div class="row content-row">
+                    <div class="col-md-4">
+                        <div class="card data-card">
+                            <div class="card-header">
+                                <h5>分类树形结构</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="tree-view">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-folder-open"></i> 原材料
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-folder-open"></i> 金属材料
+                                                </a>
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-file"></i> 钢材</a></li>
+                                                    <li><a href="#"><i class="fa fa-file"></i> 铝材</a></li>
+                                                    <li><a href="#"><i class="fa fa-file"></i> 铜材</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-folder-open"></i> 非金属材料
+                                                </a>
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-file"></i> 塑料</a></li>
+                                                    <li><a href="#"><i class="fa fa-file"></i> 橡胶</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-folder-open"></i> 半成品
+                                        </a>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-file"></i> 零部件</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-folder-open"></i> 成品
+                                        </a>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-file"></i> 设备</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- 分类详情表格 -->
+                <div class="row content-row">
+                    <div class="col-md-12">
+                        <div class="card data-card">
+                            <div class="card-body">
+                                <h5 class="card-title">分类列表</h5>
+                                <div class="table-responsive">
+                                    <table class="table modern-table">
+                                        <thead>
+                                            <tr>
+                                                <th>分类编码</th>
+                                                <th>分类名称</th>
+                                                <th>上级分类</th>
+                                                <th>排序</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CAT001</td>
+                                                <td>原材料</td>
+                                                <td>无</td>
+                                                <td>1</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editCategoryModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT002</td>
+                                                <td>金属材料</td>
+                                                <td>原材料</td>
+                                                <td>1</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editCategoryModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT003</td>
+                                                <td>钢材</td>
+                                                <td>金属材料</td>
+                                                <td>1</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#editCategoryModal">
+                                                        <i class="fa fa-pencil"></i> 编辑
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-rounded ml-1">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 添加分类模态框 -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">添加物资分类</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoryCode">分类编码</label>
+                            <input type="text" class="form-control" id="categoryCode" placeholder="自动生成">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryName">分类名称</label>
+                            <input type="text" class="form-control" id="categoryName" placeholder="请输入分类名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="parentId">上级分类</label>
+                            <select class="form-control" id="parentId">
+                                <option value="">无</option>
+                                <option value="1">原材料</option>
+                                <option value="2">金属材料</option>
+                                <option value="3">非金属材料</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sort">排序</label>
+                            <input type="number" class="form-control" id="sort" placeholder="请输入排序号" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">描述</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="请输入分类描述"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 编辑分类模态框 -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCategoryModalLabel">编辑物资分类</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="editCategoryCode">分类编码</label>
+                            <input type="text" class="form-control" id="editCategoryCode" value="CAT001" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoryName">分类名称</label>
+                            <input type="text" class="form-control" id="editCategoryName" value="原材料">
+                        </div>
+                        <div class="form-group">
+                            <label for="editParentId">上级分类</label>
+                            <select class="form-control" id="editParentId">
+                                <option value="" selected>无</option>
+                                <option value="1">原材料</option>
+                                <option value="2">金属材料</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editSort">排序</label>
+                            <input type="number" class="form-control" id="editSort" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">描述</label>
+                            <textarea class="form-control" id="editDescription" rows="3">生产用原材料</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入jQuery和Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

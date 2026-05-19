@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出库管理</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 引入现代化样式 -->
+    <link rel="stylesheet" href="assets/css/modern.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏 -->
+            <div class="col-md-2 sidebar">
+                <div class="sidebar-header">
+                    <h4>仓库管理系统</h4>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="warehouse.html"><i class="fa fa-building"></i> 仓库管理</a></li>
+                    <li><a href="material-category.html"><i class="fa fa-sitemap"></i> 物资分类</a></li>
+                    <li><a href="material-ledger.html"><i class="fa fa-book"></i> 物资台账</a></li>
+                    <li><a href="warehouse-in.html"><i class="fa fa-arrow-down"></i> 入库管理</a></li>
+                    <li><a href="warehouse-out.html" class="active"><i class="fa fa-arrow-up"></i> 出库管理</a></li>
+                    <li><a href="inventory.html"><i class="fa fa-search"></i> 库存查询</a></li>
+                </ul>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class="col-md-10 content">
+                <div class="page-header">
+                    <h2>出库管理</h2>
+                </div>
+                
+                <!-- 搜索和操作栏 -->
+                <div class="row content-row">
+                    <div class="col-md-12">
+                        <div class="card card-search">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="搜索出库单号或物资名称">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary btn-lg btn-rounded" type="button">
+                                                    <i class="fa fa-search"></i> 搜索
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <button class="btn btn-success btn-lg btn-rounded" data-toggle="modal" data-target="#addWarehouseOutModal">
+                                            <i class="fa fa-plus"></i> 新增出库
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 出库列表 -->
+                <div class="row content-row">
+                    <div class="col-md-12">
+                        <div class="card" data-card>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table modern-table">
+                                        <thead>
+                                        <tr>
+                                            <th>出库单号</th>
+                                            <th>仓库</th>
+                                            <th>出库时间</th>
+                                            <th>出库人</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>OUT20241208001</td>
+                                            <td>一号仓库</td>
+                                            <td>2024-12-08 14:20</td>
+                                            <td>王五</td>
+                                            <td><span class="badge badge-success">已完成</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary btn-rounded" data-toggle="modal" data-target="#viewWarehouseOutModal">
+                                                    <i class="fa fa-eye"></i> 查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>OUT20241208002</td>
+                                            <td>二号仓库</td>
+                                            <td>2024-12-08 15:10</td>
+                                            <td>赵六</td>
+                                            <td><span class="badge badge-success">已完成</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#viewWarehouseOutModal">
+                                                    <i class="fa fa-eye"></i> 查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 新增出库模态框 -->
+    <div class="modal fade" id="addWarehouseOutModal" tabindex="-1" role="dialog" aria-labelledby="addWarehouseOutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addWarehouseOutModalLabel">新增出库</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="warehouseOutCode">出库单号</label>
+                                    <input type="text" class="form-control" id="warehouseOutCode" placeholder="自动生成">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="warehouseId">仓库</label>
+                                    <select class="form-control" id="warehouseId">
+                                        <option value="">请选择仓库</option>
+                                        <option value="1">一号仓库</option>
+                                        <option value="2">二号仓库</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="warehouseOutDate">出库时间</label>
+                                    <input type="datetime-local" class="form-control" id="warehouseOutDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="operator">出库人</label>
+                                    <input type="text" class="form-control" id="operator" placeholder="请输入出库人">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark">备注</label>
+                            <textarea class="form-control" id="remark" rows="2" placeholder="请输入备注信息"></textarea>
+                        </div>
+                        
+                        <!-- 出库明细 -->
+                        <h6 class="mt-4">出库明细</h6>
+                        <table class="table table-bordered mt-2">
+                            <thead>
+                                <tr>
+                                    <th>物资</th>
+                                    <th>规格</th>
+                                    <th>单位</th>
+                                    <th>库存</th>
+                                    <th>数量</th>
+                                    <th>单价</th>
+                                    <th>金额</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select class="form-control">
+                                            <option value="">请选择物资</option>
+                                            <option value="1">螺丝 - MAT001</option>
+                                            <option value="2">螺母 - MAT002</option>
+                                            <option value="3">塑料板 - MAT003</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" class="form-control" readonly></td>
+                                    <td><input type="text" class="form-control" readonly></td>
+                                    <td><input type="number" class="form-control" readonly value="0"></td>
+                                    <td><input type="number" class="form-control" value="1"></td>
+                                    <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                                    <td><input type="text" class="form-control" readonly value="0.00"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-secondary btn-sm mt-2">
+                            <i class="fa fa-plus"></i> 添加明细行
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 查看出库详情模态框 -->
+    <div class="modal fade" id="viewWarehouseOutModal" tabindex="-1" role="dialog" aria-labelledby="viewWarehouseOutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewWarehouseOutModalLabel">出库单详情</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>出库单号</label>
+                                <input type="text" class="form-control" value="OUT20241208001" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>仓库</label>
+                                <input type="text" class="form-control" value="一号仓库" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>出库时间</label>
+                                <input type="text" class="form-control" value="2024-12-08 14:20" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>出库人</label>
+                                <input type="text" class="form-control" value="王五" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>备注</label>
+                        <textarea class="form-control" rows="2" readonly>生产领料</textarea>
+                    </div>
+                    
+                    <!-- 出库明细 -->
+                    <h6 class="mt-4">出库明细</h6>
+                    <table class="table table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th>物资编码</th>
+                                <th>物资名称</th>
+                                <th>规格</th>
+                                <th>单位</th>
+                                <th>数量</th>
+                                <th>单价</th>
+                                <th>金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MAT001</td>
+                                <td>螺丝</td>
+                                <td>M8×20</td>
+                                <td>个</td>
+                                <td>500</td>
+                                <td>0.50</td>
+                                <td>250.00</td>
+                            </tr>
+                            <tr>
+                                <td>MAT002</td>
+                                <td>螺母</td>
+                                <td>M8</td>
+                                <td>个</td>
+                                <td>500</td>
+                                <td>0.30</td>
+                                <td>150.00</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="5" class="text-right">合计</th>
+                                <th>0.80</th>
+                                <th>400.00</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入jQuery和Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

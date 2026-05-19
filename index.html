@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仓库库存管理系统</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 引入现代化CSS样式 -->
+    <link rel="stylesheet" href="assets/css/modern.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏 -->
+            <div class="col-md-2 sidebar">
+                <div class="sidebar-header">
+                    <h4>仓库管理系统</h4>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html" class="active"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="warehouse.html"><i class="fa fa-building"></i> 仓库管理</a></li>
+                    <li><a href="material-category.html"><i class="fa fa-sitemap"></i> 物资分类</a></li>
+                    <li><a href="material-ledger.html"><i class="fa fa-book"></i> 物资台账</a></li>
+                    <li><a href="warehouse-in.html"><i class="fa fa-arrow-down"></i> 入库管理</a></li>
+                    <li><a href="warehouse-out.html"><i class="fa fa-arrow-up"></i> 出库管理</a></li>
+                    <li><a href="inventory.html"><i class="fa fa-search"></i> 库存查询</a></li>
+                </ul>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class="col-md-10 content">
+                <div class="page-header">
+                    <h2>仪表盘</h2>
+                </div>
+                
+                <!-- 统计卡片 -->
+                <div class="row stats-row">
+                    <div class="col-md-3">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">仓库数量</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card secondary">
+                            <div class="stat-icon">
+                                <i class="fa fa-sitemap"></i>
+                            </div>
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">物资分类</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card info">
+                            <div class="stat-icon">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <div class="stat-value">1200</div>
+                            <div class="stat-label">物资数量</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <div class="stat-value">85</div>
+                            <div class="stat-label">库存预警</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 图表和最近操作 -->
+                <div class="row content-row">
+                    <div class="col-md-8">
+                        <div class="card dashboard-card">
+                            <div class="card-header">
+                                <h5>库存趋势</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="inventoryChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card dashboard-card">
+                            <div class="card-header">
+                                <h5>最近操作</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="activity-list">
+                                    <li class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">入库: 电脑</p>
+                                            <p class="activity-time">2分钟前</p>
+                                        </div>
+                                        <span class="activity-badge badge-success">+10</span>
+                                    </li>
+                                    <li class="activity-item">
+                                        <div class="activity-icon bg-danger">
+                                            <i class="fa fa-arrow-up"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">出库: 打印机</p>
+                                            <p class="activity-time">15分钟前</p>
+                                        </div>
+                                        <span class="activity-badge badge-danger">-5</span>
+                                    </li>
+                                    <li class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">入库: 鼠标</p>
+                                            <p class="activity-time">1小时前</p>
+                                        </div>
+                                        <span class="activity-badge badge-success">+20</span>
+                                    </li>
+                                    <li class="activity-item">
+                                        <div class="activity-icon bg-danger">
+                                            <i class="fa fa-arrow-up"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">出库: 键盘</p>
+                                            <p class="activity-time">2小时前</p>
+                                        </div>
+                                        <span class="activity-badge badge-danger">-15</span>
+                                    </li>
+                                    <li class="activity-item">
+                                        <div class="activity-icon bg-primary">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-text">新增: 仓库A</p>
+                                            <p class="activity-time">3小时前</p>
+                                        </div>
+                                        <span class="activity-badge badge-primary">新建</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入jQuery和Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 引入Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <script>
+    // 页面加载完成后初始化图表
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取库存趋势图表的canvas元素
+        var inventoryChart = document.getElementById('inventoryChart').getContext('2d');
+        
+        // 创建库存趋势图表
+        new Chart(inventoryChart, {
+            type: 'line',
+            data: {
+                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                datasets: [{
+                    label: '库存总量',
+                    data: [1200, 1900, 3000, 5000, 2500, 3200, 4500, 5500, 6000, 6800, 7500, 8000],
+                    borderColor: '#4f46e5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: '物资种类',
+                    data: [200, 350, 500, 700, 900, 1000, 1200, 1400, 1600, 1800, 2000, 2200],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        // 模拟从API获取统计数据
+        function fetchStats() {
+            // 这里应该是实际的API调用，现在使用模拟数据
+            /*
+            fetch('http://localhost:5000/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    // 更新统计卡片数据
+                    document.querySelector('.stat-card.primary .stat-value').textContent = data.warehouse_count;
+                    document.querySelector('.stat-card.secondary .stat-value').textContent = data.material_count;
+                    document.querySelector('.stat-card.info .stat-value').textContent = data.total_inventory;
+                    document.querySelector('.stat-card.warning .stat-value').textContent = data.warning_count;
+                });
+            */
+        }
+        
+        // 页面加载时获取统计数据
+        fetchStats();
+    });
+    </script>
+</body>
+</html>
